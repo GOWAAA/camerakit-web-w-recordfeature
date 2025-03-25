@@ -9,23 +9,23 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/ffmpeg/(.*)",
-      "dest": "/ffmpeg/$1"
+      "source": "/ffmpeg/:path*",
+      "destination": "/ffmpeg/:path*"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "source": "/assets/:path*",
+      "destination": "/assets/:path*"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/ffmpeg/(.*)",
+      "source": "/ffmpeg/:path*",
       "headers": [
         {
           "key": "Cross-Origin-Embedder-Policy",
@@ -37,5 +37,6 @@
         }
       ]
     }
-  ]
+  ],
+  "cleanUrls": true
 }
