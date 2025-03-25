@@ -3,6 +3,7 @@ const Dotenv = require("dotenv-webpack")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const webpack = require("webpack")
 
 module.exports = {
   entry: "./src/main.js",
@@ -114,6 +115,11 @@ module.exports = {
           to: "ffmpeg",
         },
       ],
+    }),
+    new webpack.DefinePlugin({
+      "process.env.API_TOKEN": JSON.stringify(process.env.API_TOKEN),
+      "process.env.LENS_ID": JSON.stringify(process.env.LENS_ID),
+      "process.env.GROUP_ID": JSON.stringify(process.env.GROUP_ID),
     }),
   ],
 }
