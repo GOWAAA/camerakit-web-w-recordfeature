@@ -5,7 +5,9 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "build",
+        "buildCommand": "npm run build",
+        "installCommand": "npm ci"
       }
     }
   ],
@@ -38,5 +40,10 @@
       ]
     }
   ],
-  "cleanUrls": true
+  "cleanUrls": true,
+  "env": {
+    "API_TOKEN": "@api_token",
+    "LENS_ID": "@lens_id",
+    "GROUP_ID": "@group_id"
+  }
 }

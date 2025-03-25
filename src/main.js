@@ -10,6 +10,7 @@ import { bootstrapCameraKit, createMediaStreamSource, Transform2D } from "@snap/
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { fetchFile, toBlobURL } from "@ffmpeg/util"
 import "./styles/index.v3.css"
+import "./config.js"
 ;(async function () {
   let mediaRecorder
   let recordedChunks = []
@@ -17,10 +18,15 @@ import "./styles/index.v3.css"
   let recordPressedCount = 0
 
   const ffmpeg = new FFmpeg()
-  //Replace with your own api token, lens id, and group id
-  const apiToken = process.env.API_TOKEN
-  const lensID = process.env.LENS_ID
-  const groupID = process.env.GROUP_ID
+  // Get environment variables from our config
+  const apiToken = window.ENV.API_TOKEN
+  const lensID = window.ENV.LENS_ID
+  const groupID = window.ENV.GROUP_ID
+
+  if (!apiToken || !lensID || !groupID) {
+    console.error("Missing required environment variables. Please check your Vercel deployment settings.")
+    return
+  }
 
   const cameraKit = await bootstrapCameraKit({
     apiToken: apiToken,
