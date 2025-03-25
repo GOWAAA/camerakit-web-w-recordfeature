@@ -40,10 +40,5 @@
       ]
     }
   ],
-  "cleanUrls": true,
-  "env": {
-    "API_TOKEN": "@api_token",
-    "LENS_ID": "@lens_id",
-    "GROUP_ID": "@group_id"
-  }
+  "cleanUrls": true
 }
