@@ -1,9 +1,10 @@
 const path = require("path")
-const Dotenv = require("dotenv-webpack")
+// const Dotenv = require("dotenv-webpack")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const webpack = require("webpack")
+require("dotenv").config()
 
 module.exports = {
   entry: "./src/main.js",
@@ -96,7 +97,7 @@ module.exports = {
     },
   },
   plugins: [
-    new Dotenv(),
+    // new Dotenv(),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html",

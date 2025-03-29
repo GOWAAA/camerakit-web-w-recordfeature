@@ -183,9 +183,15 @@ import "./styles/index.v3.css"
 
   //Function to setup media recorder and start recording
   function manageMediaRecorder(session) {
+    const constraints = {
+      video: {
+        facingMode: isBackFacing ? (isMobile ? { exact: "environment" } : "environment") : isMobile ? { exact: "user" } : "user",
+      },
+      audio: true,
+    }
     // First get user's camera and microphone
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+      .getUserMedia(constraints)
       .then((audioVideoStream) => {
         // Extract just the audio track
         const audioTrack = audioVideoStream.getAudioTracks()[0]
