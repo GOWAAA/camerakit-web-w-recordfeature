@@ -64,13 +64,27 @@ project/
 │   │   └── SwitchButton.png
 │   ├── styles/        # CSS files
 │   │   └── index.v3.css
-│   ├── index.html     # Main HTML file
-│   └── main.js        # Main JavaScript file
-├── .env               # Environment variables (local development)
-├── .env.example       # Example environment variables template
-├── webpack.config.js  # Webpack configuration
-└── package.json       # Project dependencies
+│   ├── camera.js      # Camera functionality
+│   ├── recorder.js    # Recording functionality
+│   ├── ui.js         # UI management
+│   ├── videoProcessor.js # Video processing logic
+│   ├── settings.js   # Configuration settings
+│   ├── index.html    # Main HTML file (with direct image references)
+│   └── main.js       # Main JavaScript file
+├── .env              # Environment variables (local development)
+├── .env.example      # Example environment variables template
+├── webpack.config.js # Webpack configuration
+└── package.json      # Project dependencies
 ```
+
+### Key Changes in Latest Version
+
+- Modular JavaScript files for better code organization:
+  - `camera.js`: Handles camera initialization and management
+  - `recorder.js`: Manages video recording functionality
+  - `ui.js`: Controls UI elements and interactions
+  - `videoProcessor.js`: Handles video processing operations
+  - `settings.js`: Centralizes configuration settings
 
 ## Getting Started 🚀
 
