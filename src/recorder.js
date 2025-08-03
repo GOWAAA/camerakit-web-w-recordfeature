@@ -1,24 +1,47 @@
 import { Settings } from "./settings"
-
 export class MediaRecorderManager {
-  constructor(videoProcessor, uiManager) {
+  constructor(videoProcessor, uiManager, audioStreams) {
     this.mediaRecorder = null
     this.recordedChunks = []
     this.videoProcessor = videoProcessor
     this.uiManager = uiManager
     this.audioVideoStream = null
     this.canvasStream = null
+    this.mixDestination = null
+    this.audioContexts = []
+    this.monitorNodes = []
+    this.monitoredStreams = []
+    this.userMediaStream = null
+
+    // prepare audio streams and connect to this.mixDestination
+    let mixAudioContext = new AudioContext()
+    this.mixDestination = mixAudioContext.createMediaStreamDestination()
+    for (let i = 0; i < audioStreams.length; i++) {
+      if (audioStreams[i]) {
+        let newStream = mixAudioContext.createMediaStreamSource(audioStreams[i])
+        newStream.connect(this.mixDestination)
+      }
+    }
+
+    let audioTracks = []
+    for (let i = 0; i < audioStreams.length; i++) {
+      if (audioStreams[i]) {
+        audioTracks.push(...audioStreams[i].getAudioTracks())
+      }
+    }
   }
 
-  async startRecording(liveRenderTarget, constraints) {
+  async startRecording(liveRenderTarget) {
     try {
-      this.audioVideoStream = await navigator.mediaDevices.getUserMedia(constraints)
-      const audioTrack = this.audioVideoStream.getAudioTracks()[0]
+      const recordStream = new MediaStream()
       this.canvasStream = liveRenderTarget.captureStream(Settings.recording.fps)
-      this.canvasStream.addTrack(audioTrack)
+      recordStream.addTrack(this.canvasStream.getVideoTracks()[0])
+      recordStream.addTrack(this.mixDestination.stream.getAudioTracks()[0])
 
-      this.mediaRecorder = new MediaRecorder(this.canvasStream, {
+      this.mediaRecorder = new MediaRecorder(recordStream, {
         mimeType: Settings.recording.mimeType,
+        videoBitsPerSecond: Settings.recording.videoBitsPerSecond,
+        audioBitsPerSecond: Settings.recording.audioBitsPerSecond,
       })
       this.recordedChunks = []
 

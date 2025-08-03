@@ -34,6 +34,10 @@ export const Settings = {
     mimeType: "video/mp4",
     fps: 60,
     outputFileName: "recording.mp4",
+    recordVideoBitsPerSecond: 6000000,
+    recordAudioBitsPerSecond: 128000,
+    recordLensAudio: true,
+    recordMicAudio: true,
   },
 
   // FFmpeg settings
@@ -41,7 +45,7 @@ export const Settings = {
     baseURL: "/ffmpeg",
     coreURL: "ffmpeg-core.js",
     wasmURL: "ffmpeg-core.wasm",
-    outputOptions: ["-movflags", "faststart", "-c", "copy"],
+    outputOptions: ["-movflags", "faststart", "-c", "copy", "-c:a", "aac"],
   },
 
   // UI settings

@@ -41,7 +41,7 @@ A web application demonstrating Snap's Camera Kit integration with video recordi
 
 ## Tech Stack 🛠️
 
-- Camera Kit for Web V1.1.0
+- Camera Kit for Web V1.8.0
 - FFmpeg.wasm (for video processing)
 - Webpack 5
 - MediaRecorder API
@@ -79,6 +79,7 @@ project/
 
 ### Key Changes in Latest Version
 
+- **Audio Recording Enhancement**: Audio from lens can now be recorded together with the video and mic input, but if there is any change in audio track within the lens, the change will not be recorded
 - Modular JavaScript files for better code organization:
   - `camera.js`: Handles camera initialization and management
   - `recorder.js`: Manages video recording functionality
@@ -276,6 +277,7 @@ SOFTWARE.
 - Built with [Snap Camera Kit](https://kit.snapchat.com/camera-kit)
 - Uses [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
 - Project improvements with help from Hong Wei ([@hongweitangcom](https://www.instagram.com/hongweitangcom/))
+- Lens audio recording method discovered by [@newyellow](https://github.com/newyellow/CameraKit-Record-Template)
 
 ## ⚠️ Important Note About Dependencies
 

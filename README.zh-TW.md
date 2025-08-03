@@ -39,7 +39,7 @@
 
 ## 技術架構 🛠️
 
-- Camera Kit for Web V1.1.0
+- Camera Kit for Web V1.8.0
 - FFmpeg.wasm（影片處理）
 - Webpack 5
 - MediaRecorder API
@@ -77,6 +77,7 @@ project/
 
 ### 最新版本重要更新
 
+- **音訊錄製功能提升**：現在可以錄製來自濾鏡的音訊與影片和麥克風輸入，但如果濾鏡內的音軌有任何變化，變化部分將不會被錄製
 - JavaScript 檔案模組化，提升程式碼組織：
   - `camera.js`：處理相機初始化和管理
   - `recorder.js`：管理影片錄製功能
@@ -273,6 +274,7 @@ Copyright (c) 2024
 - 使用 [Snap Camera Kit](https://kit.snapchat.com/camera-kit) 建置
 - 使用 [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
 - 專案改進由 Hong Wei ([@hongweitangcom](https://www.instagram.com/hongweitangcom/)) 協助
+- 濾鏡音訊錄製方法由 [@newyellow](https://github.com/newyellow/CameraKit-Record-Template) 發現
 
 ---
 

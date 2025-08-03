@@ -23,7 +23,7 @@
     "@ffmpeg/core": "^0.12.10",
     "@ffmpeg/ffmpeg": "^0.12.10",
     "@ffmpeg/util": "^0.12.2",
-    "@snap/camera-kit": "^1.2.0",
+    "@snap/camera-kit": "^1.8.0",
     "dotenv": "^16.4.7",
     "dotenv-webpack": "^8.1.0",
     "jquery": "^3.7.0",

@@ -14,6 +14,15 @@ import { UIManager } from "./ui"
 import { VideoProcessor } from "./videoProcessor"
 import { Settings } from "./settings"
 ;(async function () {
+  let audioContexts = []
+  let monitorNodes = []
+  let monitoredStreams = []
+  let userMediaStream = null
+  let mediaRecorder = null
+
+  setupAudioContextMonitor()
+  setupAudioNodeMonitor()
+
   // Get environment variables
   const apiToken = process.env.API_TOKEN
   const lensID = process.env.LENS_ID
@@ -28,7 +37,6 @@ import { Settings } from "./settings"
   const uiManager = new UIManager()
   const cameraManager = new CameraManager()
   const videoProcessor = new VideoProcessor()
-  const mediaRecorder = new MediaRecorderManager(videoProcessor, uiManager)
 
   // Initialize Camera Kit
   const cameraKit = await bootstrapCameraKit({
@@ -60,7 +68,8 @@ import { Settings } from "./settings"
   // Set up event listeners
   uiManager.recordButton.addEventListener("click", async () => {
     if (uiManager.recordPressedCount % 2 === 0) {
-      const success = await mediaRecorder.startRecording(liveRenderTarget, cameraManager.getConstraints())
+      mediaRecorder = await setupAudioStreams()
+      const success = await mediaRecorder.startRecording(liveRenderTarget)
       if (success) {
         uiManager.updateRecordButtonState(true)
       }
@@ -95,4 +104,86 @@ import { Settings } from "./settings"
 
   // Update initial render size
   uiManager.updateRenderSize(source, liveRenderTarget)
+
+  //functions for audio monitoring recording
+  function setupAudioContextMonitor() {
+    const originalAudioContext = window.AudioContext || window.webkitAudioContext
+    let capturedAudioContext = null
+
+    window.AudioContext = window.webkitAudioContext = function () {
+      capturedAudioContext = new originalAudioContext()
+      console.log("Audio context created:", capturedAudioContext)
+
+      audioContexts.push(capturedAudioContext)
+
+      return capturedAudioContext
+    }
+  }
+
+  function setupAudioNodeMonitor() {
+    // Store the original connect method
+    const originalConnect = AudioNode.prototype.connect
+
+    // Override the AudioNode.prototype.connect method
+    AudioNode.prototype.connect = function (destinationNode) {
+      console.log("Audio Node Connecting: " + this + " to " + destinationNode)
+
+      // if the current node is a gainNode, create another stream node and connect it
+      if (destinationNode instanceof AudioDestinationNode) {
+        console.log("final node found")
+
+        // create monitor node
+        let streamNode = this.context.createMediaStreamDestination()
+        monitorNodes.push(streamNode)
+
+        // connect current node to the monitor node
+        this.connect(streamNode)
+      }
+
+      // Call original connect method
+      return originalConnect.apply(this, arguments)
+    }
+  }
+
+  async function setupAudioStreams() {
+    // Wait for monitor nodes to be ready
+    await waitForMonitorNodes()
+
+    if (Settings.recording.recordMicAudio) {
+      userMediaStream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          frameRate: { ideal: Settings.recording.fps },
+          facingMode: cameraManager.getConstraints(),
+        },
+        audio: true,
+      })
+      monitoredStreams.push(userMediaStream)
+    }
+
+    if (Settings.recording.recordLensAudio) {
+      for (let i = 0; i < monitorNodes.length; i++) {
+        if (monitorNodes[i].stream) {
+          monitoredStreams.push(monitorNodes[i].stream)
+        }
+      }
+    }
+
+    return new MediaRecorderManager(videoProcessor, uiManager, monitoredStreams)
+  }
+
+  async function waitForMonitorNodes() {
+    const maxWait = 1000 // 2 seconds max
+    const checkInterval = 100 // Check every 100ms
+    let waited = 0
+
+    while (waited < maxWait) {
+      const allReady = monitorNodes.every((node) => node && node.stream)
+      if (allReady) return
+
+      await new Promise((resolve) => setTimeout(resolve, checkInterval))
+      waited += checkInterval
+    }
+
+    console.warn("Some monitor nodes may not be ready")
+  }
 })()
