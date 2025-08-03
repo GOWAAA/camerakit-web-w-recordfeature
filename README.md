@@ -5,6 +5,16 @@
 
 [繁體中文](README.zh-TW.md) | English
 
+### Key Changes in Latest Version [3rd Aug 2025]
+
+- **Audio Recording Enhancement**: Audio from lens can now be recorded together with the video and mic input, but if there is any change in audio track within the lens, the change will not be recorded
+- Modular JavaScript files for better code organization:
+  - `camera.js`: Handles camera initialization and management
+  - `recorder.js`: Manages video recording functionality
+  - `ui.js`: Controls UI elements and interactions
+  - `videoProcessor.js`: Handles video processing operations
+  - `settings.js`: Centralizes configuration settings
+
 A web application demonstrating Snap's Camera Kit integration with video recording capabilities. This project allows users to apply Snap Lenses and record videos with the effects.
 
 > ⚠️ **SECURITY WARNING**  
@@ -76,16 +86,6 @@ project/
 ├── webpack.config.js # Webpack configuration
 └── package.json      # Project dependencies
 ```
-
-### Key Changes in Latest Version
-
-- **Audio Recording Enhancement**: Audio from lens can now be recorded together with the video and mic input, but if there is any change in audio track within the lens, the change will not be recorded
-- Modular JavaScript files for better code organization:
-  - `camera.js`: Handles camera initialization and management
-  - `recorder.js`: Manages video recording functionality
-  - `ui.js`: Controls UI elements and interactions
-  - `videoProcessor.js`: Handles video processing operations
-  - `settings.js`: Centralizes configuration settings
 
 ## Getting Started 🚀
 
