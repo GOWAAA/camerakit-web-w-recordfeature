@@ -33,9 +33,7 @@
 >
 > ✅ 這樣設定可確保你的憑證和應用程式安全！
 
-![示範](https://github.com/GOWAAA/camerakit-web-w-recordfeature/blob/main/camerakit-template-demo.gif)
-
-🔗 [線上示範](https://camerakit-web-w-recordfeature-gw.vercel.app)
+🔗 [線上示範](https://camerakit.gowaaa.com/)
 
 ## 功能特點 ✨
 

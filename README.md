@@ -35,9 +35,7 @@ A web application demonstrating Snap's Camera Kit integration with video recordi
 >
 > ✅ This setup keeps your credentials safe and your app secure!
 
-![Demo](https://github.com/GOWAAA/camerakit-web-w-recordfeature/blob/main/camerakit-template-demo.gif)
-
-🔗 [Live Demo](https://camerakit-web-w-recordfeature-gw.vercel.app)
+🔗 [Live Demo](https://camerakit.gowaaa.com/)
 
 ## Features ✨
 
