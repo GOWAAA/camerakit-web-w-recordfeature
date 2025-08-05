@@ -31,10 +31,10 @@ export class MediaRecorderManager {
     }
   }
 
-  async startRecording(liveRenderTarget) {
+  async startRecording(renderTarget) {
     try {
       const recordStream = new MediaStream()
-      this.canvasStream = liveRenderTarget.captureStream(Settings.recording.fps)
+      this.canvasStream = renderTarget.captureStream(Settings.recording.fps)
       recordStream.addTrack(this.canvasStream.getVideoTracks()[0])
       recordStream.addTrack(this.mixDestination.stream.getAudioTracks()[0])
 

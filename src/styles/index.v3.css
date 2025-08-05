@@ -11,6 +11,13 @@ body {
   width: 100vw;
   z-index: 1;
 }
+#capture-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+}
 
 .poweredbysnap-logo {
   width: auto; /* Set to auto to avoid stretching */

@@ -45,9 +45,14 @@ import { Settings } from "./settings"
 
   // Get canvas element for live render target
   const liveRenderTarget = document.getElementById("canvas")
+  const captureRenderTarget = document.getElementById("capture-canvas")
 
   // Create camera kit session
   const session = await cameraKit.createSession({ liveRenderTarget })
+
+  //Set captureRenderTarget canvas to render out capture render target from camera kit
+  //It is not rendering out anything yet until session.play('capture') is called
+  captureRenderTarget.replaceWith(session.output.capture)
 
   // Initialize camera and set up source
   const mediaStream = await cameraManager.initializeCamera()
@@ -59,7 +64,7 @@ import { Settings } from "./settings"
   source.setTransform(Transform2D.MirrorX)
   await source.setRenderSize(window.innerWidth, window.innerHeight)
   await session.setFPSLimit(Settings.camera.fps)
-  await session.play()
+  await session.play() //plays live target by default
 
   // Load and apply lens
   const lens = await cameraKit.lensRepository.loadLens(lensID, groupID)
@@ -68,8 +73,14 @@ import { Settings } from "./settings"
   // Set up event listeners
   uiManager.recordButton.addEventListener("click", async () => {
     if (uiManager.recordPressedCount % 2 === 0) {
+      //disable live canvas so the capture canvas that is behind live canvas will be shown instead
+      // capture canvas z-index is set behind live canvas in css
+      liveRenderTarget.style.display = "none"
+      //play capture render target so capture canvas will render len
+      await session.play("capture")
+      //setup audtio streams
       mediaRecorder = await setupAudioStreams()
-      const success = await mediaRecorder.startRecording(liveRenderTarget)
+      const success = await mediaRecorder.startRecording(captureRenderTarget)
       if (success) {
         uiManager.updateRecordButtonState(true)
       }
@@ -77,6 +88,10 @@ import { Settings } from "./settings"
       uiManager.updateRecordButtonState(false)
       uiManager.toggleRecordButton(false)
       mediaRecorder.stopRecording()
+      //show live render targetcanvas again
+      liveRenderTarget.style.display = "block"
+      //need to play live target for canvas to show anything
+      await session.play("live")
     }
   })
 
