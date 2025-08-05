@@ -30,7 +30,10 @@
 >    - 使用 Vercel（推薦的託管平台）
 >    - 在 Vercel 的 Settings → Environment Variables 中加入憑證
 >    - 依照我們的[部署指南](#部署到-vercel-)操作
->
+
+     - 請注意，憑證仍然有可能被暴露，但 Snapchat 本身具有內建的 CORS 原始來源檢查機制，只允許經核准的網址存取應用程式金鑰。你可以在提交 Camera Kit 應用程式審核時設定允許的網址。
+     - 為了提升安全性，建議將金鑰儲存在 AWS Secret Manager，並透過 AWS Lambda 搭配 API Gateway 來安全地取得金鑰。
+
 > ✅ 這樣設定可確保你的憑證和應用程式安全！
 
 🔗 [線上示範](https://camerakit.gowaaa.com/)
