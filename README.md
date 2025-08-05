@@ -31,11 +31,9 @@ A web application demonstrating Snap's Camera Kit integration with video recordi
 > 2. For deployment:
 >    - Use Vercel (recommended hosting platform)
 >    - Add your credentials in Vercel's Settings → Environment Variables
-
-     - Follow our [Deployment Guide](#deployment-on-vercel-)
-
-     - Note that the credentials WILL STILL BE EXPOSED, but Snapchat has inbuilt CORS origin check to allow only the approved URL to access the app token, which can be setup will you send the camera kit app for approval
-     - For extra security, it is recommended to store the tokens on AWS secret manager and retrieve it via AWS Lambda and Gatway API
+>    - Follow our [Deployment Guide](#deployment-on-vercel-)
+>    - Note that the credentials WILL STILL BE EXPOSED, but Snapchat has inbuilt CORS origin check to allow only the approved URL to access the app token, which can be setup will you send the camera kit app for approval
+>    - For extra security, it is recommended to store the tokens on AWS secret manager and retrieve it via AWS Lambda and Gatway API
 
 > ✅ This setup keeps your credentials safe and your app secure!
 
