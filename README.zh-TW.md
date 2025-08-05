@@ -6,6 +6,7 @@
 ### 最新版本重要更新 [8 月 5 日 2025 年]
 
 - Capture & Live render target 現在的運作方式與你在 Lens Studio 中按下錄製按鈕時完全相同
+- 要錄製 captureRenderTarget，請在 settings.js 中將 recordCaptureRenderTarget 設為 true。
 - **音訊錄製功能提升**：現在可以錄製來自濾鏡的音訊與影片和麥克風輸入，但如果濾鏡內的音軌有任何變化，變化部分將不會被錄製
 - JavaScript 檔案模組化，提升程式碼組織：
   - `camera.js`：處理相機初始化和管理

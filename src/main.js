@@ -19,6 +19,7 @@ import { Settings } from "./settings"
   let monitoredStreams = []
   let userMediaStream = null
   let mediaRecorder = null
+  let currentRenderTarget
 
   setupAudioContextMonitor()
   setupAudioNodeMonitor()
@@ -52,7 +53,10 @@ import { Settings } from "./settings"
 
   //Set captureRenderTarget canvas to render out capture render target from camera kit
   //It is not rendering out anything yet until session.play('capture') is called
+  //To record capture render target, set recordCaptureRenderTarget to be true in settings.js
   captureRenderTarget.replaceWith(session.output.capture)
+
+  currentRenderTarget = liveRenderTarget
 
   // Initialize camera and set up source
   const mediaStream = await cameraManager.initializeCamera()
@@ -73,14 +77,18 @@ import { Settings } from "./settings"
   // Set up event listeners
   uiManager.recordButton.addEventListener("click", async () => {
     if (uiManager.recordPressedCount % 2 === 0) {
-      //disable live canvas so the capture canvas that is behind live canvas will be shown instead
-      // capture canvas z-index is set behind live canvas in css
-      liveRenderTarget.style.display = "none"
-      //play capture render target so capture canvas will render len
-      await session.play("capture")
+      if (Settings.recording.recordCaptureRenderTarget) {
+        //disable live canvas so the capture canvas that is behind live canvas will be shown instead
+        // capture canvas z-index is set behind live canvas in css
+        liveRenderTarget.style.display = "none"
+        //play capture render target so capture canvas will render len
+        await session.play("capture")
+        currentRenderTarget = captureRenderTarget
+      }
+
       //setup audtio streams
       mediaRecorder = await setupAudioStreams()
-      const success = await mediaRecorder.startRecording(captureRenderTarget)
+      const success = await mediaRecorder.startRecording(currentRenderTarget)
       if (success) {
         uiManager.updateRecordButtonState(true)
       }
@@ -88,10 +96,13 @@ import { Settings } from "./settings"
       uiManager.updateRecordButtonState(false)
       uiManager.toggleRecordButton(false)
       mediaRecorder.stopRecording()
-      //show live render targetcanvas again
-      liveRenderTarget.style.display = "block"
-      //need to play live target for canvas to show anything
-      await session.play("live")
+      if (Settings.recording.recordCaptureRenderTarget) {
+        //show live render targetcanvas again
+        liveRenderTarget.style.display = "block"
+        //need to play live target for canvas to show anything
+        await session.play("live")
+        currentRenderTarget = liveRenderTarget
+      }
     }
   })
 
@@ -99,6 +110,7 @@ import { Settings } from "./settings"
     try {
       const source = await cameraManager.updateCamera(session)
       uiManager.updateRenderSize(source, liveRenderTarget)
+      uiManager.updateRenderSize(source, captureRenderTarget)
     } catch (error) {
       console.error("Error switching camera:", error)
     }
@@ -109,16 +121,18 @@ import { Settings } from "./settings"
     try {
       mediaRecorder.resetRecordingVariables()
       uiManager.updateRenderSize(source, liveRenderTarget)
+      uiManager.updateRenderSize(source, captureRenderTarget)
     } catch (error) {
       console.error("Error resetting camera:", error)
     }
   })
 
   // Add window resize listener
-  window.addEventListener("resize", () => uiManager.updateRenderSize(source, liveRenderTarget))
+  window.addEventListener("resize", () => uiManager.updateRenderSize(source, liveRenderTarget), uiManager.updateRenderSize(source, captureRenderTarget))
 
   // Update initial render size
   uiManager.updateRenderSize(source, liveRenderTarget)
+  uiManager.updateRenderSize(source, captureRenderTarget)
 
   //functions for audio monitoring recording
   function setupAudioContextMonitor() {

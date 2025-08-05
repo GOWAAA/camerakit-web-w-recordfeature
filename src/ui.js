@@ -22,7 +22,9 @@ export class UIManager {
   }
 
   updateRecordButtonState(isRecording) {
-    this.recordButton.style.backgroundImage = isRecording ? `url('${Settings.ui.recordButton.stopImage}')` : `url('${Settings.ui.recordButton.startImage}')`
+    this.recordButton.style.backgroundImage = isRecording
+      ? `url('${Settings.ui.recordButton.stopImage}')`
+      : `url('${Settings.ui.recordButton.startImage}')`
     this.recordPressedCount++
   }
 
@@ -34,6 +36,10 @@ export class UIManager {
     this.actionButton.style.display = "block"
     this.backButtonContainer.style.display = "block"
     this.switchButton.style.display = "none"
+
+    if (Settings.ui.displayPreview) {
+      this.displayPreview(url)
+    }
 
     document.getElementById("download-button").onclick = () => {
       const a = document.createElement("a")
@@ -69,15 +75,40 @@ export class UIManager {
       this.backButtonContainer.style.display = "none"
       this.switchButton.style.display = "block"
       this.toggleRecordButton(true)
+      if (Settings.ui.displayPreview) {
+        this.removePreview()
+      }
     }
   }
 
-  updateRenderSize(source, liveRenderTarget) {
+  updateRenderSize(source, renderTarget) {
     const width = window.innerWidth
     const height = window.innerHeight
 
-    liveRenderTarget.style.width = `${width}px`
-    liveRenderTarget.style.height = `${height}px`
+    renderTarget.style.width = `${width}px`
+    renderTarget.style.height = `${height}px`
     source.setRenderSize(width, height)
+  }
+
+  displayPreview(dataURL) {
+    const preview = document.createElement("video")
+    preview.src = dataURL
+    preview.id = "preview"
+    preview.controls = true // Allow playback controls
+    preview.autoplay = true
+    preview.playsInline = true
+    preview.id = "preview"
+    preview.style = "position: fixed; top: 30%; left: 50%; width: 70vw; height: 124vw; transform: translate(-50%, -30%); z-index: 999;"
+    document.body.appendChild(preview)
+  }
+
+  removePreview() {
+    const preview = document.getElementById("preview")
+    if (preview) {
+      preview.remove() // Remove the element from the DOM
+      console.log("Preview removed")
+    } else {
+      console.log("No preview to remove")
+    }
   }
 }

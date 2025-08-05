@@ -38,6 +38,7 @@ export const Settings = {
     recordAudioBitsPerSecond: 128000,
     recordLensAudio: true,
     recordMicAudio: true,
+    recordCaptureRenderTarget: false,
   },
 
   // FFmpeg settings
@@ -62,5 +63,6 @@ export const Settings = {
       backButton: "./assets/BackButton.png",
       loadingIcon: "./assets/LoadingIcon.png",
     },
+    displayPreview: true,
   },
 }

@@ -8,6 +8,7 @@
 ### Key Changes in Latest Version [5th Aug 2025]
 
 - Capture & Live render target now works exactly as it is on Lens Studio when you press record button
+- To record capture render target, set recordCaptureRenderTarget to be true in settings.js
 - **Audio Recording Enhancement**: Audio from lens can now be recorded together with the video and mic input, but if there is any change in audio track within the lens, the change will not be recorded
 - Modular JavaScript files for better code organization:
   - `camera.js`: Handles camera initialization and management

@@ -80,7 +80,7 @@ body {
 
 #action-buttons {
   position: absolute;
-  bottom: 20%; /* Adjust the distance from the bottom of the screen */
+  bottom: 9%; /* Adjust the distance from the bottom of the screen */
   left: 50%; /* Center horizontally */
   transform: translate(-50%); /* Offset by half the width and height */
   display: flex; /* Enables flex layout */
@@ -124,8 +124,8 @@ body {
 }
 
 #share-button {
-  height: 150px;
-  width: 150px;
+  height: 125px;
+  width: 125px;
   background-color: transparent;
   transform: translate(-25%, 0);
   color: transparent;
@@ -150,8 +150,8 @@ body {
 }
 
 #download-button {
-  height: 150px;
-  width: 150px;
+  height: 125px;
+  width: 125px;
   background-color: transparent;
   transform: translate(25%, 0);
   color: transparent;
