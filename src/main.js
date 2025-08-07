@@ -43,6 +43,7 @@ import { launchParams } from "./launchParams"
   // Initialize Camera Kit
   const cameraKit = await bootstrapCameraKit({
     apiToken: apiToken,
+    logger: "console", //to show lens print log on the broswer console
   })
 
   // Get canvas element for live render target
