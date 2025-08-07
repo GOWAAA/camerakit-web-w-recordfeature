@@ -5,8 +5,9 @@
 
 [繁體中文](README.zh-TW.md) | English
 
-### Key Changes in Latest Version [5th Aug 2025]
+### Key Changes in Latest Version [7th Aug 2025]
 
+- Added launchParams capability to send data to Lens at launch
 - Capture & Live render target now works exactly as it is on Lens Studio when you press record button
 - To record capture render target, set recordCaptureRenderTarget to be true in settings.js
 - Video preview added when recording stop

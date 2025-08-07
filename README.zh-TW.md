@@ -5,6 +5,7 @@
 
 ### 最新版本重要更新 [8 月 5 日 2025 年]
 
+- 新增 launchParams 功能，可在啟動時傳送資料到 Lens
 - Capture & Live render target 現在的運作方式與你在 Lens Studio 中按下錄製按鈕時完全相同
 - 要錄製 captureRenderTarget，請在 settings.js 中將 recordCaptureRenderTarget 設為 true
 - 停止錄製後新增影片預覽功能

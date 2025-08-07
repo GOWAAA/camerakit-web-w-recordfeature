@@ -13,6 +13,7 @@ import { MediaRecorderManager } from "./recorder"
 import { UIManager } from "./ui"
 import { VideoProcessor } from "./videoProcessor"
 import { Settings } from "./settings"
+import { launchParams } from "./launchParams"
 ;(async function () {
   let audioContexts = []
   let monitorNodes = []
@@ -72,7 +73,11 @@ import { Settings } from "./settings"
 
   // Load and apply lens
   const lens = await cameraKit.lensRepository.loadLens(lensID, groupID)
-  await session.applyLens(lens)
+  //launchParams allow you to send data to lens at launch, giving you control to trigger different lens effect
+  // such as different text, colours, objects visibility etc.
+  // See launchParams.js for code sample to use in Lens Studio
+  // You may remove launchParams if you have no need for it
+  await session.applyLens(lens, launchParams)
 
   // Set up event listeners
   uiManager.recordButton.addEventListener("click", async () => {
