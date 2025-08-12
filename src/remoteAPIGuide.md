@@ -11,8 +11,7 @@ Step-by-step guide to setting up remote API to detect button press from Lens to 
 1. Go to https://my-lenses.snapchat.com/apis/
 2. Click **"Add a new API"**
 3. Fill in the following details (ignore all optional inputs):
-
-### 1. Create API
+   Create API
 
 - **Name**: `Button Press API` _(or any name you prefer - this will be the name you see when importing the API from Asset Library)_
 - **Provider**: Your name _(or any name you prefer)_
@@ -24,11 +23,7 @@ Step-by-step guide to setting up remote API to detect button press from Lens to 
   1. Go to MyLenses → your Camera Kit app → Developer Portal
   2. Copy the ID below the app name
 - **Host**: Your username or anything you want _(this won't affect API functionality)_
-
-### 2. Create Endpoint
-
-Create an endpoint with these settings:
-
+  Create an endpoint with these settings:
 - **Reference ID**: `button_pressed` _(this is the endpoint name)_
 - **Path**: `button_pressed` _(this can be anything - doesn't affect the API)_
 - **Method**: Choose `GET`
@@ -36,21 +31,20 @@ Create an endpoint with these settings:
 - **Parameter Location**: `Query`
 - **Required**: `Yes`
 - **Constant**: `No`
-
-### 3. Finalize API Creation
+  Finalize API Creation
 
 4. Click **"Create your API"**
 
 ## 🎯 Lens Studio Setup
 
-### 5. Import API to Lens Studio
+Import API to Lens Studio
 
 5. Open **Lens Studio**
 6. Create a new project and import the API you just created from **Asset Library**
 7. You will see JavaScript code created in your scene
 8. Create a **screen button** and **2D text** in your scene
 
-### 9. Update the JavaScript Code
+Update the JavaScript Code
 
 9. Open the JavaScript code provided from the API _(NOT the one that ends with "Module")_
 10. Replace the existing code with the following:
@@ -85,19 +79,19 @@ script.button.onTap.add(() => {
 })
 ```
 
-### 11. Configure Script Inputs
+Configure Script Inputs
 
 11. Assign the **button** and **text** components to the script input fields
 12. When you click the button, you will get a **bad request** in Lens Studio - this is normal, as it will only work on Camera Kit
 
 ## 📱 Deployment & Testing
 
-### 13. Lens Approval Process
+Lens Approval Process
 
 13. **Submit your lens for approval**
 14. Add your lens to **Lens Scheduler** if you haven't already (so you can run it on Camera Kit)
 
-### 15. Camera Kit Configuration
+Camera Kit Configuration
 
 15. In your Camera Kit project, go to `settings.js` and set:
     ```javascript
@@ -105,7 +99,7 @@ script.button.onTap.add(() => {
     useRemoteAPI: true
     ```
 
-### 16. Final Steps
+Final Steps
 
 16. **Wait for lens to be approved**
 17. Run the Camera Kit code locally
