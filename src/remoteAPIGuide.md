@@ -11,26 +11,31 @@ Step-by-step guide to setting up remote API to detect button press from Lens to 
 1. Go to https://my-lenses.snapchat.com/apis/
 2. Click **"Add a new API"**
 3. Fill in the following details (ignore all optional inputs):
-   Create API
 
-- **Name**: `Button Press API` _(or any name you prefer, this will be the name you see when importing the API from Asset Library)_
-- **Provider**: Your name _(or any name you prefer)_
-- **Description**: `API to detect button pressed event from lens` _(you can customize this, it won't affect API functionality)_
-- **Target Platforms**: Choose `Camera_Kit`
-- **Username Allowlist**: Enter your Snap username
-- **Request Processor**: Choose `Custom Processor`
-- **Snap Kit App ID**:
-  1. Go to MyLenses → your Camera Kit app → Developer Portal
-  2. Copy the ID below the app name
-- **Host**: Your username or anything you want _(this won't affect API functionality)_
-  Create an endpoint with these settings:
-- **Reference ID**: `button_pressed` _(this is the endpoint name)_
-- **Path**: `button_pressed` _(this can be anything, doesn't affect the API)_
-- **Method**: Choose `GET`
-- **Parameters**: `button_id` _(you can add as many parameters as you want)_
-- **Parameter Location**: `Query`
-- **Required**: `Yes`
-- **Constant**: `No`
+### API Specification Settings
+
+| Field                  | Value                                                       | Notes                                                                                             |
+| ---------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Name**               | `Button Press API`                                          | (or any name you prefer, this will be the name you see when importing the API from Asset Library) |
+| **Provider**           | Your name                                                   | (or any name you prefer)                                                                          |
+| **Description**        | `API to detect button pressed event from lens`              | (you can customize this, it won't affect API functionality)                                       |
+| **Target Platforms**   | `Camera_Kit`                                                |                                                                                                   |
+| **Username Allowlist** | Enter your Snap username                                    |                                                                                                   |
+| **Request Processor**  | `Custom Processor`                                          |                                                                                                   |
+| **Snap Kit App ID**    | Copy from MyLenses → your Camera Kit app → Developer Portal | Copy the ID below the app name                                                                    |
+| **Host**               | Your username or anything you want                          | (this won't affect API functionality)                                                             |
+
+### Endpoint Configuration
+
+| Field                  | Value            | Notes                                          |
+| ---------------------- | ---------------- | ---------------------------------------------- |
+| **Reference ID**       | `button_pressed` | (this is the endpoint name)                    |
+| **Path**               | `button_pressed` | (this can be anything, doesn't affect the API) |
+| **Method**             | `GET`            |                                                |
+| **Parameters**         | `button_id`      | (you can add as many parameters as you want)   |
+| **Parameter Location** | `Query`          |                                                |
+| **Required**           | `Yes`            |                                                |
+| **Constant**           | `No`             |                                                |
 
 4. Click **"Create your API"**
 
@@ -98,7 +103,7 @@ script.button.onTap.add(() => {
     useRemoteAPI: true
     ```
 
-###Final Steps
+### Final Steps
 
 16. **Wait for lens to be approved**
 17. Run the Camera Kit code locally
