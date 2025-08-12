@@ -1,6 +1,6 @@
 # 遠端 API 設定指南
 
-//感謝 @bastiensaro (https://www.filtre-experience.fr/) 讓此指南得以實現
+感謝 @bastiensaro (https://www.filtre-experience.fr/) 讓此指南得以實現
 
 從 Lens 到 Camera Kit for Web 設定 Remote API 檢測按鈕點擊的逐步指南。
 
@@ -117,5 +117,5 @@ Camera Kit 設定
 ---
 
 > **注意**：API 只有在 Camera Kit 上執行時才能正常運作，在 Lens Studio 預覽模式下無法運作。
-> 
+>
 > **注意**：確保您的 specsID、端點和參數名稱與您在 remoteAPI.js 中建立的內容相符。

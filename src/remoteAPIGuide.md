@@ -1,6 +1,6 @@
 # Remote API Setup Guide
 
-//Credits to @bastiensaro (https://www.filtre-experience.fr/) for making the guide possible
+Credits to @bastiensaro (https://www.filtre-experience.fr/) for making the guide possible
 
 Step-by-step guide to setting up remote API to detect button press from Lens to Camera Kit for Web.
 

@@ -302,6 +302,7 @@ SOFTWARE.
 - Uses [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
 - Project improvements with help from Hong Wei ([@hongweitangcom](https://www.instagram.com/hongweitangcom/))
 - Lens audio recording method discovered by [@newyellow](https://github.com/newyellow/CameraKit-Record-Template)
+- Remote API guide made possible with help from [@bastiensaro](https://www.filtre-experience.fr/)
 
 ## ⚠️ Important Note About Dependencies
 

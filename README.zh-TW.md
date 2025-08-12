@@ -299,6 +299,7 @@ Copyright (c) 2024
 - 使用 [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
 - 專案改進由 Hong Wei ([@hongweitangcom](https://www.instagram.com/hongweitangcom/)) 協助
 - 濾鏡音訊錄製方法由 [@newyellow](https://github.com/newyellow/CameraKit-Record-Template) 發現
+- Remote API 指南在 [@bastiensaro](https://www.filtre-experience.fr/) 的協助下得以實現
 
 ---
 
