@@ -112,6 +112,8 @@ script.button.onTap.add(() => {
 
 當一切設定正確時，當您在 lens 中按下按鈕時，您應該會在控制台中看到 `button 12345 is pressed`。
 
+18. 編輯 remoteAPI.js 以符合您的專案需求
+
 ---
 
 > **注意**：API 只有在 Camera Kit 上執行時才能正常運作，在 Lens Studio 預覽模式下無法運作。
