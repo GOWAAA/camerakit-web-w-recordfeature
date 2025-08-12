@@ -8,7 +8,7 @@
 - **遠端 API 整合** 📡
   - 新增完整的遠端 API 指南，用於偵測來自 Lens 的按鈕點擊
   - 新增 `remoteAPI.js` 來處理來自 Lens 的遠端 API 請求
-  - 包含雙語設定指南：`remoteAPIGuide.md`（英文版）和 `remoteAPIGuide.zh-tw.md`（繁體中文版）
+  - 包含雙語設定指南：[remoteAPIGuide.md](src/remoteAPIGuide.md)（英文版）和 [remoteAPIGuide.zh-tw.md](src/remoteAPIGuide.zh-tw.md)（繁體中文版）
 
 ### 最新版本重要更新 [8 月 7 日 2025 年]
 

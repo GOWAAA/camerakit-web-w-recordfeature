@@ -10,7 +10,7 @@
 - **Remote API Integration** 📡
   - Added comprehensive guide to use remote API to detect button press from Lens
   - Added `remoteAPI.js` to handle remote API requests from Lens
-  - Included bilingual setup guides: `remoteAPIGuide.md` (English) and `remoteAPIGuide.zh-tw.md` (Traditional Chinese)
+  - Included bilingual setup guides: [remoteAPIGuide.md](src/remoteAPIGuide.md) (English) and [remoteAPIGuide.zh-tw.md](src/remoteAPIGuide.zh-tw.md) (Traditional Chinese)
 
 ### Key Changes in Latest Version [7th Aug 2025]
 
