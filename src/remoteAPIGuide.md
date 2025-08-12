@@ -1,4 +1,4 @@
-# Remote API Setup Guide
+# Remote API Lens Button Detection Setup Guide
 
 Credits to @bastiensaro (https://www.filtre-experience.fr/) for making the guide possible
 
