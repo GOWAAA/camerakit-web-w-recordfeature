@@ -4,6 +4,14 @@
  */
 
 export const Settings = {
+  //Camera kit config
+  config: {
+    apiToken: process.env.API_TOKEN,
+    lensID: process.env.LENS_ID,
+    groupID: process.env.GROUP_ID,
+    remoteAPISpecId: "YOUR_REMOTE_API_SPEC_ID_HERE", // From my lenses API section
+    useRemoteAPI: false, // Set to true to enable using remote API
+  },
   // Camera settings
   camera: {
     fps: 60,
@@ -64,5 +72,10 @@ export const Settings = {
       loadingIcon: "./assets/LoadingIcon.png",
     },
     displayPreview: true,
+  },
+
+  //remote API settings
+  remoteAPI: {
+    isEnabled: false,
   },
 }

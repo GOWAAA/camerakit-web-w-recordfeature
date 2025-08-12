@@ -7,6 +7,7 @@
  */
 
 import { bootstrapCameraKit, createMediaStreamSource, Transform2D } from "@snap/camera-kit"
+import { bootstrapCameraKitWithRemoteAPI } from "./remoteAPI"
 import "./styles/index.v3.css"
 import { CameraManager } from "./camera"
 import { MediaRecorderManager } from "./recorder"
@@ -21,16 +22,12 @@ import { launchParams } from "./launchParams"
   let userMediaStream = null
   let mediaRecorder = null
   let currentRenderTarget
+  let cameraKit = null
 
   setupAudioContextMonitor()
   setupAudioNodeMonitor()
 
-  // Get environment variables
-  const apiToken = process.env.API_TOKEN
-  const lensID = process.env.LENS_ID
-  const groupID = process.env.GROUP_ID
-
-  if (!apiToken || !lensID || !groupID) {
+  if (!Settings.config.apiToken || !Settings.config.lensID || !Settings.config.groupID) {
     console.error("Missing required environment variables. Please check your environment settings.")
     return
   }
@@ -41,11 +38,14 @@ import { launchParams } from "./launchParams"
   const videoProcessor = new VideoProcessor()
 
   // Initialize Camera Kit
-  const cameraKit = await bootstrapCameraKit({
-    apiToken: apiToken,
-    logger: "console", //to show lens print log on the broswer console
-  })
-
+  if (Settings.config.useRemoteAPI) {
+    cameraKit = await bootstrapCameraKitWithRemoteAPI()
+  } else {
+    cameraKit = await bootstrapCameraKit({
+      apiToken: Settings.config.apiToken,
+      logger: "console", //to show lens print log on the broswer console
+    })
+  }
   // Get canvas element for live render target
   const liveRenderTarget = document.getElementById("canvas")
   const captureRenderTarget = document.getElementById("capture-canvas")
@@ -73,7 +73,7 @@ import { launchParams } from "./launchParams"
   await session.play() //plays live target by default
 
   // Load and apply lens
-  const lens = await cameraKit.lensRepository.loadLens(lensID, groupID)
+  const lens = await cameraKit.lensRepository.loadLens(Settings.config.lensID, Settings.config.groupID)
   //launchParams allow you to send data to lens at launch, giving you control to trigger different lens effect
   // such as different text, colours, objects visibility etc.
   // See launchParams.js for code sample to use in Lens Studio

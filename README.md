@@ -5,6 +5,13 @@
 
 [繁體中文](README.zh-TW.md) | English
 
+### Key Changes in Latest Version [12th Aug 2025]
+
+- **Remote API Integration** 📡
+  - Added comprehensive guide to use remote API to detect button press from Lens
+  - Added `remoteAPI.js` to handle remote API requests from Lens
+  - Included bilingual setup guides: `remoteAPIGuide.md` (English) and `remoteAPIGuide.zh-tw.md` (Traditional Chinese)
+
 ### Key Changes in Latest Version [7th Aug 2025]
 
 - Added launchParams capability to send data to Lens at launch
@@ -64,9 +71,20 @@ A web application demonstrating Snap's Camera Kit integration with video recordi
 ## Project Structure 📁
 
 ```
-project/
+camerakit-web-w-recordfeature/
+├── LICENSE                    # MIT license
+├── README.md                  # English documentation
+├── README.zh-TW.md           # Traditional Chinese documentation
+├── build/                    # Build output directory (generated)
+├── node_modules/             # Node.js dependencies (generated)
+├── package-lock.json         # Dependency lock file
+├── package.json              # Project dependencies and scripts
+├── public/
+│   └── ffmpeg/              # FFmpeg WebAssembly files
+│       ├── ffmpeg-core.js
+│       └── ffmpeg-core.wasm
 ├── src/
-│   ├── assets/         # Images and icons
+│   ├── assets/              # Images and icons
 │   │   ├── BackButton.png
 │   │   ├── DownloadButton.png
 │   │   ├── LoadingIcon.png
@@ -76,19 +94,21 @@ project/
 │   │   ├── RecordStop.png
 │   │   ├── ShareButton.png
 │   │   └── SwitchButton.png
-│   ├── styles/        # CSS files
+│   ├── styles/              # CSS files
 │   │   └── index.v3.css
-│   ├── camera.js      # Camera functionality
-│   ├── recorder.js    # Recording functionality
-│   ├── ui.js         # UI management
-│   ├── videoProcessor.js # Video processing logic
-│   ├── settings.js   # Configuration settings
-│   ├── index.html    # Main HTML file (with direct image references)
-│   └── main.js       # Main JavaScript file
-├── .env              # Environment variables (local development)
-├── .env.example      # Example environment variables template
-├── webpack.config.js # Webpack configuration
-└── package.json      # Project dependencies
+│   ├── camera.js            # Camera functionality and management
+│   ├── recorder.js          # Video recording functionality
+│   ├── ui.js               # UI management and interactions
+│   ├── videoProcessor.js   # Video processing logic
+│   ├── settings.js         # Configuration settings
+│   ├── launchParams.js     # Launch parameter handling for Lens data
+│   ├── remoteAPI.js        # Remote API communication with Lens
+│   ├── remoteAPIGuide.md   # Remote API setup guide (English)
+│   ├── remoteAPIGuide.zh-tw.md # Remote API setup guide (Traditional Chinese)
+│   ├── index.html          # Main HTML file
+│   └── main.js             # Main JavaScript entry point
+├── vercel.json             # Vercel deployment configuration
+└── webpack.config.js       # Webpack build configuration
 ```
 
 ## Getting Started 🚀
