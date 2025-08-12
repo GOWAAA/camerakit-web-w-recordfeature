@@ -111,4 +111,5 @@ When everything is set up correctly, you should see `button 12345 is pressed` in
 ---
 
 > **Note**: The API will only function properly when running on Camera Kit, not in Lens Studio preview mode.
+
 > **Note**: Ensure that your specsID, endpoint and parameter names matches what you created in remoteAPI.js
