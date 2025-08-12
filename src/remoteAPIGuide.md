@@ -13,9 +13,9 @@ Step-by-step guide to setting up remote API to detect button press from Lens to 
 3. Fill in the following details (ignore all optional inputs):
    Create API
 
-- **Name**: `Button Press API` _(or any name you prefer - this will be the name you see when importing the API from Asset Library)_
+- **Name**: `Button Press API` _(or any name you prefer, this will be the name you see when importing the API from Asset Library)_
 - **Provider**: Your name _(or any name you prefer)_
-- **Description**: `API to detect button pressed event from lens` _(you can customize this - it won't affect API functionality)_
+- **Description**: `API to detect button pressed event from lens` _(you can customize this, it won't affect API functionality)_
 - **Target Platforms**: Choose `Camera_Kit`
 - **Username Allowlist**: Enter your Snap username
 - **Request Processor**: Choose `Custom Processor`
@@ -25,13 +25,12 @@ Step-by-step guide to setting up remote API to detect button press from Lens to 
 - **Host**: Your username or anything you want _(this won't affect API functionality)_
   Create an endpoint with these settings:
 - **Reference ID**: `button_pressed` _(this is the endpoint name)_
-- **Path**: `button_pressed` _(this can be anything - doesn't affect the API)_
+- **Path**: `button_pressed` _(this can be anything, doesn't affect the API)_
 - **Method**: Choose `GET`
 - **Parameters**: `button_id` _(you can add as many parameters as you want)_
 - **Parameter Location**: `Query`
 - **Required**: `Yes`
 - **Constant**: `No`
-  Finalize API Creation
 
 4. Click **"Create your API"**
 

@@ -14,9 +14,9 @@
 
 建立 API
 
-- **Name**：`Button Press API` _（或您偏好的任何名稱 - 這將是您從資源庫匯入 API 時看到的名稱）_
+- **Name**：`Button Press API` _（或您偏好的任何名稱，這將是您從資源庫匯入 API 時看到的名稱）_
 - **Provider**：您的名稱 _（或您偏好的任何名稱）_
-- **Description**：`API to detect button pressed event from lens` _（您可以自訂此項 - 不會影響 API 功能）_
+- **Description**：`API to detect button pressed event from lens` _（您可以自訂此項，不會影響 API 功能）_
 - **Target Platforms**：選擇 `Camera_Kit`
 - **Username Allowlist**：輸入您的 Snap 用戶名稱
 - **Request Processor**：選擇 `Custom Processor`
@@ -30,14 +30,12 @@
 使用以下設定建立端點：
 
 - **Reference ID**：`button_pressed` _（這是端點名稱）_
-- **Path**：`button_pressed` _（這可以是任何內容 - 不會影響 API）_
+- **Path**：`button_pressed` _（這可以是任何內容，不會影響 API）_
 - **Method**：選擇 `GET`
 - **Parameters**：`button_id` _（您可以新增任意數量的參數）_
 - **Parameter Location**：`Query`
 - **Required**：`Yes`
 - **Constant**：`No`
-
-完成 API 建立
 
 4. 點擊 **"Create your API"**
 
