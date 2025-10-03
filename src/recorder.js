@@ -31,17 +31,21 @@ export class MediaRecorderManager {
     }
   }
 
-  async startRecording(renderTarget) {
+  async startRecording(session) {
     try {
       const recordStream = new MediaStream()
-      this.canvasStream = renderTarget.captureStream(Settings.recording.fps)
+      if (Settings.recording.recordCaptureRenderTarget) {
+        this.canvasStream = session.output.capture.captureStream(Settings.recording.fps)
+      } else {
+        this.canvasStream = session.output.live.captureStream(Settings.recording.fps)
+      }
       recordStream.addTrack(this.canvasStream.getVideoTracks()[0])
       recordStream.addTrack(this.mixDestination.stream.getAudioTracks()[0])
 
       this.mediaRecorder = new MediaRecorder(recordStream, {
         mimeType: Settings.recording.mimeType,
-        videoBitsPerSecond: Settings.recording.videoBitsPerSecond,
-        audioBitsPerSecond: Settings.recording.audioBitsPerSecond,
+        videoBitsPerSecond: Settings.recording.recordVideoBitsPerSecond,
+        audioBitsPerSecond: Settings.recording.recordAudioBitsPerSecond,
       })
       this.recordedChunks = []
 

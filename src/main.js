@@ -62,6 +62,7 @@ import { launchParams } from "./launchParams"
 
   // Initialize camera and set up source
   const mediaStream = await cameraManager.initializeCamera()
+
   const source = createMediaStreamSource(mediaStream, {
     cameraType: "user",
     disableSourceAudio: false,
