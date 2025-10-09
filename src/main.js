@@ -95,7 +95,7 @@ import { launchParams } from "./launchParams"
 
       //setup audtio streams
       mediaRecorder = await setupAudioStreams()
-      const success = await mediaRecorder.startRecording(currentRenderTarget)
+      const success = await mediaRecorder.startRecording(session)
       if (success) {
         uiManager.updateRecordButtonState(true)
       }
