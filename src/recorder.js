@@ -8,25 +8,14 @@ export class MediaRecorderManager {
     this.audioVideoStream = null
     this.canvasStream = null
     this.mixDestination = null
-    this.audioContexts = []
-    this.monitorNodes = []
-    this.monitoredStreams = []
-    this.userMediaStream = null
 
-    // prepare audio streams and connect to this.mixDestination
-    let mixAudioContext = new AudioContext()
+    // Mix every incoming audio stream (mic and/or lens audio) into a single
+    // destination so the recording captures all of them together.
+    const mixAudioContext = new AudioContext()
     this.mixDestination = mixAudioContext.createMediaStreamDestination()
-    for (let i = 0; i < audioStreams.length; i++) {
-      if (audioStreams[i]) {
-        let newStream = mixAudioContext.createMediaStreamSource(audioStreams[i])
-        newStream.connect(this.mixDestination)
-      }
-    }
-
-    let audioTracks = []
-    for (let i = 0; i < audioStreams.length; i++) {
-      if (audioStreams[i]) {
-        audioTracks.push(...audioStreams[i].getAudioTracks())
+    for (const stream of audioStreams) {
+      if (stream) {
+        mixAudioContext.createMediaStreamSource(stream).connect(this.mixDestination)
       }
     }
   }
@@ -50,14 +39,12 @@ export class MediaRecorderManager {
       this.recordedChunks = []
 
       this.mediaRecorder.ondataavailable = (event) => {
-        console.log("start record")
         if (event.data && event.data.size > 0) {
           this.recordedChunks.push(event.data)
         }
       }
 
       this.mediaRecorder.onstop = async () => {
-        console.log("stop record")
         this.uiManager.showLoading(true)
         const blob = new Blob(this.recordedChunks, { type: Settings.recording.mimeType })
         const fixedBlob = await this.videoProcessor.fixVideoDuration(blob)

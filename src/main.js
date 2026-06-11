@@ -83,17 +83,17 @@ import { launchParams } from "./launchParams"
 
   // Set up event listeners
   uiManager.recordButton.addEventListener("click", async () => {
-    if (uiManager.recordPressedCount % 2 === 0) {
+    if (!uiManager.isRecording) {
       if (Settings.recording.recordCaptureRenderTarget) {
         //disable live canvas so the capture canvas that is behind live canvas will be shown instead
         // capture canvas z-index is set behind live canvas in css
         liveRenderTarget.style.display = "none"
-        //play capture render target so capture canvas will render len
+        //play capture render target so capture canvas will render the lens
         await session.play("capture")
         currentRenderTarget = captureRenderTarget
       }
 
-      //setup audtio streams
+      //setup audio streams
       mediaRecorder = await setupAudioStreams()
       const success = await mediaRecorder.startRecording(session)
       if (success) {
@@ -104,7 +104,7 @@ import { launchParams } from "./launchParams"
       uiManager.toggleRecordButton(false)
       mediaRecorder.stopRecording()
       if (Settings.recording.recordCaptureRenderTarget) {
-        //show live render targetcanvas again
+        //show live render target canvas again
         liveRenderTarget.style.display = "block"
         //need to play live target for canvas to show anything
         await session.play("live")
@@ -134,8 +134,11 @@ import { launchParams } from "./launchParams"
     }
   })
 
-  // Add window resize listener
-  window.addEventListener("resize", () => uiManager.updateRenderSize(source, liveRenderTarget), uiManager.updateRenderSize(source, captureRenderTarget))
+  // Add window resize listener - keep both canvases sized to the window
+  window.addEventListener("resize", () => {
+    uiManager.updateRenderSize(source, liveRenderTarget)
+    uiManager.updateRenderSize(source, captureRenderTarget)
+  })
 
   // Update initial render size
   uiManager.updateRenderSize(source, liveRenderTarget)
@@ -186,13 +189,9 @@ import { launchParams } from "./launchParams"
     await waitForMonitorNodes()
 
     if (Settings.recording.recordMicAudio) {
-      userMediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          frameRate: { ideal: Settings.recording.fps },
-          facingMode: cameraManager.getConstraints(),
-        },
-        audio: true,
-      })
+      // Only the microphone is needed here; the camera video is already handled
+      // by the Camera Kit session, so we request audio only.
+      userMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true })
       monitoredStreams.push(userMediaStream)
     }
 
@@ -208,7 +207,7 @@ import { launchParams } from "./launchParams"
   }
 
   async function waitForMonitorNodes() {
-    const maxWait = 1000 // 2 seconds max
+    const maxWait = 1000 // wait up to 1 second
     const checkInterval = 100 // Check every 100ms
     let waited = 0
 

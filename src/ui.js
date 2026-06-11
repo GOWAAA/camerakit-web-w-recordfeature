@@ -8,7 +8,7 @@ export class UIManager {
     this.switchButton = document.getElementById("switch-button")
     this.loadingIcon = document.getElementById("loading")
     this.backButtonContainer = document.getElementById("back-button-container")
-    this.recordPressedCount = 0
+    this.isRecording = false
   }
 
   toggleRecordButton(isVisible) {
@@ -25,7 +25,7 @@ export class UIManager {
     this.recordButton.style.backgroundImage = isRecording
       ? `url('${Settings.ui.recordButton.stopImage}')`
       : `url('${Settings.ui.recordButton.startImage}')`
-    this.recordPressedCount++
+    this.isRecording = isRecording
   }
 
   showLoading(show) {
@@ -97,7 +97,6 @@ export class UIManager {
     preview.controls = true // Allow playback controls
     preview.autoplay = true
     preview.playsInline = true
-    preview.id = "preview"
     preview.style = "position: fixed; top: 30%; left: 50%; width: 70vw; height: 124vw; transform: translate(-50%, -30%); z-index: 999;"
     document.body.appendChild(preview)
   }

@@ -73,9 +73,4 @@ export const Settings = {
     },
     displayPreview: true,
   },
-
-  //remote API settings
-  remoteAPI: {
-    isEnabled: false,
-  },
 }

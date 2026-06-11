@@ -48,6 +48,9 @@ export class CameraManager {
   }
 
   getConstraints() {
-    return this.isMobile ? (this.isBackFacing ? Settings.camera.constraints.back : Settings.camera.constraints.front) : Settings.camera.constraints.desktop
+    if (!this.isMobile) {
+      return Settings.camera.constraints.desktop
+    }
+    return this.isBackFacing ? Settings.camera.constraints.back : Settings.camera.constraints.front
   }
 }
