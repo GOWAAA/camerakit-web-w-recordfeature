@@ -69,15 +69,17 @@ export class UIManager {
         console.error("Error while sharing:", error)
       }
     }
+  }
 
-    document.getElementById("back-button").onclick = async () => {
-      this.actionButton.style.display = "none"
-      this.backButtonContainer.style.display = "none"
-      this.switchButton.style.display = "block"
-      this.toggleRecordButton(true)
-      if (Settings.ui.displayPreview) {
-        this.removePreview()
-      }
+  // Hide the post-recording buttons and preview, and restore the
+  // record/switch controls so the user can record again.
+  returnToCameraView() {
+    this.actionButton.style.display = "none"
+    this.backButtonContainer.style.display = "none"
+    this.switchButton.style.display = "block"
+    this.toggleRecordButton(true)
+    if (Settings.ui.displayPreview) {
+      this.removePreview()
     }
   }
 

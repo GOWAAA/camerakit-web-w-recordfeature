@@ -123,14 +123,18 @@ import { launchParams } from "./launchParams"
     }
   })
 
-  // Add back button handler
-  document.getElementById("back-button").addEventListener("click", async () => {
+  // Back button: restore the camera view, clear the finished recording,
+  // and resize both canvases. This is the only back-button handler.
+  document.getElementById("back-button").addEventListener("click", () => {
     try {
-      mediaRecorder.resetRecordingVariables()
+      uiManager.returnToCameraView()
+      if (mediaRecorder) {
+        mediaRecorder.resetRecordingVariables()
+      }
       uiManager.updateRenderSize(source, liveRenderTarget)
       uiManager.updateRenderSize(source, captureRenderTarget)
     } catch (error) {
-      console.error("Error resetting camera:", error)
+      console.error("Error returning to camera view:", error)
     }
   })
 
