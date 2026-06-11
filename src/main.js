@@ -192,17 +192,25 @@ import { launchParams } from "./launchParams"
     // Wait for monitor nodes to be ready
     await waitForMonitorNodes()
 
+    // Rebuild the list from scratch each time. Without this, a second recording
+    // would re-add the streams collected for the first one and mix in duplicates.
+    monitoredStreams = []
+
     if (Settings.recording.recordMicAudio) {
       // Only the microphone is needed here; the camera video is already handled
-      // by the Camera Kit session, so we request audio only.
+      // by the Camera Kit session, so we request audio only. Release any mic
+      // stream left open by a previous recording before opening a new one.
+      if (userMediaStream) {
+        userMediaStream.getTracks().forEach((track) => track.stop())
+      }
       userMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true })
       monitoredStreams.push(userMediaStream)
     }
 
     if (Settings.recording.recordLensAudio) {
-      for (let i = 0; i < monitorNodes.length; i++) {
-        if (monitorNodes[i].stream) {
-          monitoredStreams.push(monitorNodes[i].stream)
+      for (const node of monitorNodes) {
+        if (node.stream) {
+          monitoredStreams.push(node.stream)
         }
       }
     }
